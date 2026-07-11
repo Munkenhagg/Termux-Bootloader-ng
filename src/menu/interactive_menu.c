@@ -10,11 +10,19 @@ const char *interactive_menu(const char **items, size_t itemsz) {
 		draw_menu(items, itemsz);
 		switch (getch()) {
 			case KEY_UP: {
-				current--;
+				if (current == 0) {
+					current = itemsz - 1;
+				} else {
+					current--;
+				}
 				break;
 			}
 			case KEY_DOWN: {
-				current++;
+				if (current == itemsz - 1) {
+					current = 0;
+				} else {
+					current++;
+				}
 				break;
 			}
 			case '\n': {
