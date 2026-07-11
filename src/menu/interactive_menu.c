@@ -2,7 +2,6 @@
 #include <ncurses.h>
 
 const char *interactive_menu(const char **items, size_t itemsz) {
-	initscr();
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);

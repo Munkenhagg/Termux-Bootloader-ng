@@ -7,7 +7,6 @@
 #define MAIN_MENU { "Enter shell", "Login", "Manage Users", "Settings", "Advanced Options" }
 
 extern size_t current;
-extern size_t ll;
 extern char *current_user;
 
 const char *interactive_menu(const char **items, size_t itemsz);
