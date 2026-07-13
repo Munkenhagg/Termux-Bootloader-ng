@@ -11,9 +11,9 @@ void draw_menu(const char **items, size_t itemsz) {
 	fflush(stdout);
 	for (size_t i = 0; i < itemsz; i++) {
 		if (i == current) {
-			printw("> %s\n", items[i]);
+			printw("> %s%s\n", bl_config.selected_theme, items[i]);
 		} else {
-			printw("  %s\n", items[i]);
+			printw("  %s%s\n", bl_config.unselected_theme, items[i]);
 		}
 	}
 	fflush(stdout);

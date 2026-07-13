@@ -34,6 +34,5 @@ const char *interactive_menu(const char **items, size_t itemsz) {
 			}
 		}
 	}
-	endwin();
 	return selected;
 }
