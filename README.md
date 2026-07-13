@@ -6,7 +6,7 @@
 
 This is the equivelant to my old termux-bootloader project but in C
 
-I am rewriting it baecause i eant to make it more POSIX and bash wasnt letting me create most features and therefor i was stuck
+I am rewriting it baecause i want to make it more POSIX and bash wasnt letting me create most features and therefor i was stuck
 
 ---
 
