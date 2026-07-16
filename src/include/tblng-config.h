@@ -28,7 +28,9 @@ struct tbl_cfg {
 };
 
 extern struct tbl_cfg bl_config;
+extern bool tbl_colors_initialized;
 
 int parse_json(void);
+void init_theme_colors(void);
 
 #endif
