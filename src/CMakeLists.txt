@@ -71,7 +71,7 @@ endif()
 set(CFLAGS -O2 -march=native -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wformat-security -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wconversion -Wsign-conversion -Wundef -Werror=shadow -Werror=format-security -fno-omit-frame-pointer -Wcast-qual -Wredundant-decls -Winline -Wfloat-equal -Wswitch-default -Wswitch-enum -Wparentheses -Wbad-function-cast -Wpointer-arith -Wtype-limits -Wunreachable-code)
 
 if(COM_GCC)
-        set(CFLAGS ${CFLAGS} -Wmaybe-uninitialized -Wlogical-op -Wduplicated-cond -Wduplicated-branches-Wstrict-overflow=3 -Warray-bounds -Wstringop-overflow -Wnull-dereference)
+        set(CFLAGS ${CFLAGS} -Wmaybe-uninitialized -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wstrict-overflow=3 -Warray-bounds -Wstringop-overflow -Wnull-dereference)
 endif()
 
 option(BUILD_EXPERIMENTAL_FRAMEWORK "Build the experimental framework core" OFF)
