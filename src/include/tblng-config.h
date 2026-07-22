@@ -3,6 +3,8 @@
 
 #define BOOTLOADER_CONFIG "/data/data/com.termux/files/home/.config/termux-bootloader/config.json"
 
+#define MENU_MAIN { "Enter shell", "Login", "Manage Users", "Settings", "Advanced Options" }
+
 #include <stdbool.h>
 #include <stddef.h>
 
@@ -32,5 +34,6 @@ extern bool tbl_colors_initialized;
 
 int parse_json(void);
 void init_theme_colors(void);
+int look_theme2pair(const char *name);
 
 #endif

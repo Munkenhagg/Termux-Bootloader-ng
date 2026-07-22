@@ -9,9 +9,11 @@ int main(void) {
 		printf("Failed to parse config! exiting.");
 		return 1;
 	}
-	const char *menu[] = MAIN_MENU;
-	const char *selected = interactive_menu(menu, 5);
-	printf("%s\n", selected);
+	init_theme_colors();
+	const char *menu[] = MENU_MAIN;
+	const char *selected = interactive_menu(menu, get_menu_sz(menu));
 	endwin();
+	printf("%s\n", selected);
+	fflush(stdout);
 	return 0;
 }
