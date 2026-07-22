@@ -2,7 +2,7 @@
 #define TBLNG_INTERN_CONFIG_H
 
 
-#define get_menu_sz(arr) (sizeof(arr) / sizeof(arr[0]))
+#define get_menu_size(arr) (sizeof(arr) / sizeof(arr[0]))
 
 #include <stddef.h>
 #include <stdbool.h>
