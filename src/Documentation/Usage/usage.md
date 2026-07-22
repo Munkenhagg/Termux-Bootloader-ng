@@ -13,6 +13,7 @@ This is a fully working example:
 ```C
 initscr();
 const char *menu[] = { "choice_1", "choice_2", "choice_any" }; // must be type const char*[] and not const char** for get_menu_size to work
+menu_ptr_sym = "➤"
 const char *selected = interactive_menu(menu, get_menu_size(menu));
 endwin();
 printf(%s\n, selected);

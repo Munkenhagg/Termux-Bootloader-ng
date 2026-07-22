@@ -5,6 +5,9 @@ project(Termux-bootloader-ng LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_C_EXTENSIONS OFF)
+
+include(GNUInstallDirs)
 
 find_package(Curses REQUIRED COMPONENTS NCURSES)
 
@@ -32,7 +35,8 @@ set(MENU_FILES
 	interactive_menu.c
 )
 set(INITCONF_FILES
-	initconf.c
+	initconf_core.c
+	initconf_bl.c
 )
 set(CJSON_FILES
 	cJSON.c
@@ -53,11 +57,13 @@ set(FULL_SRC
 	${THEMES_FILES}
 	${INITCONF_FILES}
 	${CJSON_FILES}
+	initconf/initconf_core.c
+	initconf/initconf_bl.c
 )
 
 set(LIB_SRC
 	${MENU_FILES}
-	${INITCONF_FILES}
+	initconf/initconf_core.c
 )
 
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
@@ -73,6 +79,8 @@ set(CFLAGS -O2 -march=native -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wform
 if(COM_GCC)
         set(CFLAGS ${CFLAGS} -Wmaybe-uninitialized -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wstrict-overflow=3 -Warray-bounds -Wstringop-overflow -Wnull-dereference)
 endif()
+
+option(MENU_COLOR_SUPPORT "Adds color support to menus" ON)
 
 option(BUILD_EXPERIMENTAL_FRAMEWORK "Build the experimental framework core" OFF)
 
@@ -93,13 +101,27 @@ if(BUILD_EXPERIMENTAL_FRAMEWORK)
 	target_link_libraries(tblng-framework-static PRIVATE Curses::Curses)
 	target_compile_options(tblng-framework PRIVATE "${CFLAGS}")
 	target_compile_options(tblng-framework-static PRIVATE "${CFLAGS}")
+	if(MENU_COLOR_SUPPORT)
+		target_compile_definitions(tblng-framework PRIVATE MENU_COLOR_SUPPORT)
+		target_compile_definitions(tblng-framework-static PRIVATE MENU_COLOR_SUPPORT)
+	endif()
+	install(TARGETS tblng-framework tblng-framework-static
+		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	)
 endif()
 
 add_executable(termux-bootloader-ng ${FULL_SRC})
 set_target_properties(termux-bootloader-ng PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${MANAGER_D}
-    OUTPUT_NAME termux-bootloader-ng
+	RUNTIME_OUTPUT_DIRECTORY ${MANAGER_D}
+	OUTPUT_NAME termux-bootloader-ng
 )
 target_include_directories(termux-bootloader-ng PRIVATE include)
 target_link_libraries(termux-bootloader-ng PRIVATE Curses::Curses)
 target_compile_options(termux-bootloader-ng PRIVATE "${CFLAGS}")
+if(MENU_COLOR_SUPPORT)
+	target_compile_definitions(termux-bootloader-ng PRIVATE MENU_COLOR_SUPPORT)
+endif()
+install(TARGETS termux-bootloader-ng
+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)

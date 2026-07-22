@@ -16,12 +16,12 @@ void draw_menu(const char **items, size_t itemsz) {
 			bool cursell = (i == current) ? true : false;
 			int pair = (cursell) ? sell_pair : unsell_pair;
 			attron(pair);
-			printw("%s %s\n", (cursell) ? ">" : " ", items[i]);
+			printw("%s %s\n", (cursell) ? ((menu_ptr_sym != NULL || menu_ptr_sym[0] != '\0') ? menu_ptr_sym : ">") : " ", items[i]);
 			attroff(pair);
 		}
 	} else {
 		for (size_t i = 0; i < itemsz; i++) {
-			printw("%s %s\n", (i == current) ? ">" : " ", items[i]);
+			printw("%s %s\n", (i == current) ? ((menu_ptr_sym != NULL || menu_ptr_sym[0] != '\0') ? menu_ptr_sym : ">") : " ", items[i]);
 		}
 	}
 	refresh();

@@ -30,10 +30,17 @@ struct tbl_cfg {
 };
 
 extern struct tbl_cfg bl_config;
-extern bool tbl_colors_initialized;
+#ifdef MENU_COLOR_SUPPORT
+        extern bool tbl_colors_initialized;
+#else
+        extern const bool tbl_colors_initialized;
+#endif
+extern char *current_user;
 
 int parse_json(void);
 void init_theme_colors(void);
 int look_theme2pair(const char *name);
+bool has_permission(char *user_id, char *wanted_perm);
+int login_user(char *user_id, char *password);
 
 #endif

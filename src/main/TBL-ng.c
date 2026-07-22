@@ -10,6 +10,7 @@ int main(void) {
 		return 1;
 	}
 	init_theme_colors();
+	menu_ptr_sym = ">";
 	const char *menu[] = MENU_MAIN;
 	const char *selected = interactive_menu(menu, get_menu_size(menu));
 	endwin();
