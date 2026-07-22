@@ -11,11 +11,11 @@ SRC_MENU := $(addprefix menu/, draw_menu.c interactive_menu.c)
 SRC_GLOBALINIT := initconf/initconf.c
 SRC_THEMES := $(addprefix themes/, init_themes.c look_theme2pair.c)
 SRC := $(SRC_CJSON) $(SRC_GLOBALINIT) $(SRC_MENU) $(SRC_THEMES) $(SRC_MAIN)
-OBJ := $(patsubst %.c, build/%.o, $(SRC))
+OBJ := $(patsubst %.c, build/gnumake/%.o, $(SRC))
 
 all: $(BIN)
 
-build/%.o: %.c
+build/gnumake/%.o: %.c
 	@printf "CC  %-40s => %s\n" "$<" "$@"
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
