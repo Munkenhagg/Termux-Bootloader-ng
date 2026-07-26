@@ -2,9 +2,9 @@
 
 ## Info
 
-### Rewritten
-
 This is the equivelant to [my old termux-bootloader project](https://github.com/Munkenhagg/Termux-Bootloader) but rewritten in C
+
+This is still a work in progress and zero changes to the framework is not a gurantee
 
 ### Menu drawing framework
 
