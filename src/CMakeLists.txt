@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Termux-bootloader-ng LANGUAGES C)
+project(Termux-bootloader-ng VERSION 1.2.1 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -61,6 +61,10 @@ set(BL_MENU_FILES
 	main/advanced_options.c
 	main/quit.c
 )
+set(VERSION_FILES
+	tblng_get_version_struct.c
+	tblng_get_version_str.c
+)
 
 list(TRANSFORM MAIN_FILES PREPEND "main/")
 list(TRANSFORM MENU_FILES PREPEND "menu/")
@@ -68,10 +72,12 @@ list(TRANSFORM INITCONF_FILES PREPEND "initconf/")
 list(TRANSFORM CJSON_FILES PREPEND "cJSON/")
 list(TRANSFORM THEMES_FILES PREPEND "themes/")
 list(TRANSFORM BL_MENU_FILES PREPEND "BLmenus/")
+list(TRANSFORM VERSION_FILES PREPEND "version/")
 
 set(FULL_SRC
 	${MAIN_FILES}
 	${MENU_FILES}
+	${VERSION_FILES}
 	${THEMES_FILES}
 	${INITCONF_FILES}
 	${CJSON_FILES}
@@ -82,6 +88,7 @@ set(FULL_SRC
 
 set(LIB_SRC
 	${MENU_FILES}
+	${VERSION_FILES}
 	initconf/initconf_core.c
 )
 
@@ -105,6 +112,10 @@ option(BUILD_EXPERIMENTAL_FRAMEWORK "Build the experimental framework core" OFF)
 
 option(USE_DEBUG_BUILD "Makes debbugging in gdb or similar easier as more variables are exposed" OFF)
 
+configure_file(
+	"${CMAKE_CURRENT_SOURCE_DIR}/include/tblng-version.h.in"
+	"${CMAKE_CURRENT_BINARY_DIR}/include/gen-tblng-version.h"
+)
 if(BUILD_EXPERIMENTAL_FRAMEWORK)
 	add_library(tblng-framework SHARED ${LIB_SRC})
 	set_target_properties(tblng-framework PROPERTIES
@@ -116,8 +127,8 @@ if(BUILD_EXPERIMENTAL_FRAMEWORK)
 		ARCHIVE_OUTPUT_DIRECTORY ${LIB_D}
 		OUTPUT_NAME tblng
 	)
-	target_include_directories(tblng-framework PUBLIC include)
-	target_include_directories(tblng-framework-static PUBLIC include)
+	target_include_directories(tblng-framework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
+	target_include_directories(tblng-framework-static PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 	target_link_libraries(tblng-framework PRIVATE Curses::Curses)
 	target_link_libraries(tblng-framework-static PRIVATE Curses::Curses)
 	target_compile_options(tblng-framework PRIVATE "${CFLAGS}")
@@ -141,7 +152,7 @@ set_target_properties(termux-bootloader-ng PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${MANAGER_D}
 	OUTPUT_NAME termux-bootloader-ng
 )
-target_include_directories(termux-bootloader-ng PRIVATE include)
+target_include_directories(termux-bootloader-ng PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 target_link_libraries(termux-bootloader-ng PRIVATE Curses::Curses)
 target_compile_options(termux-bootloader-ng PRIVATE "${CFLAGS}")
 if(MENU_COLOR_SUPPORT)

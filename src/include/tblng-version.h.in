@@ -1,0 +1,22 @@
+#ifndef TBLNG_VERSION_H
+#define TBLNG_VERSION_H
+
+#include <stdint.h>
+
+#define TBLNG_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define TBLNG_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define TBLNG_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define TBLNG_VERSION "@PROJECT_VERSION@"
+
+struct tblng_version {
+	uint16_t major;
+	uint16_t minor;
+	uint16_t patch;
+};
+
+typedef struct tblng_version tblng_version_t;
+
+void tblng_get_version_struct(struct tblng_version *v);
+const char *tblng_get_version_str(void);
+
+#endif
