@@ -12,11 +12,12 @@ To use the framework, you use interactive_menu to create a menu, and assign it t
 This is a fully working example:
 ```C
 initscr();
-const char *menu[] = { "choice_1", "choice_2", "choice_any" }; // must be type const char*[] and not const char** for get_menu_size to work
-menu_ptr_sym = "➤"
-const char *selected = interactive_menu(menu, get_menu_size(menu));
+init_theme_colors(); // adds colors
+struct menu_map_entry *ents = { {"choice_1", function_1, "Function Argument"}, {"choice_2", function_2, "Function argument"}, {NULL, NULL, NULL} };
+struct menu_map *map = init_menu_map_from_array(ents);
+menu_output_t output = interactive_menu(map);
 endwin();
-printf(%s\n, selected);
+printf(%s\n, output.selected);
 fflush(stdout);
 
 ```

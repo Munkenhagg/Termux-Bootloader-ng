@@ -33,6 +33,12 @@ set(MAIN_FILES
 set(MENU_FILES
 	draw_menu.c
 	interactive_menu.c
+	init_menu_map_from_array.c
+	delete_menu_map.c
+	set_menu_map_colors.c
+	set_menu_map_pointer_symbol.c
+	set_menu_map_sync_spaces.c
+	menu_map_to_optstrarr.c
 )
 set(INITCONF_FILES
 	initconf_core.c
@@ -45,11 +51,23 @@ set(THEMES_FILES
 	init_themes.c
 	look_theme2pair.c
 )
+
+set(BL_MENU_FILES
+	main.c
+	main/enter_shell.c
+	main/login.c
+	main/manage_users.c
+	main/settings.c
+	main/advanced_options.c
+	main/quit.c
+)
+
 list(TRANSFORM MAIN_FILES PREPEND "main/")
 list(TRANSFORM MENU_FILES PREPEND "menu/")
 list(TRANSFORM INITCONF_FILES PREPEND "initconf/")
 list(TRANSFORM CJSON_FILES PREPEND "cJSON/")
 list(TRANSFORM THEMES_FILES PREPEND "themes/")
+list(TRANSFORM BL_MENU_FILES PREPEND "BLmenus/")
 
 set(FULL_SRC
 	${MAIN_FILES}
@@ -57,6 +75,7 @@ set(FULL_SRC
 	${THEMES_FILES}
 	${INITCONF_FILES}
 	${CJSON_FILES}
+	${BL_MENU_FILES}
 	initconf/initconf_core.c
 	initconf/initconf_bl.c
 )
@@ -84,6 +103,8 @@ option(MENU_COLOR_SUPPORT "Adds color support to menus" ON)
 
 option(BUILD_EXPERIMENTAL_FRAMEWORK "Build the experimental framework core" OFF)
 
+option(USE_DEBUG_BUILD "Makes debbugging in gdb or similar easier as more variables are exposed" OFF)
+
 if(BUILD_EXPERIMENTAL_FRAMEWORK)
 	add_library(tblng-framework SHARED ${LIB_SRC})
 	set_target_properties(tblng-framework PROPERTIES
@@ -105,6 +126,10 @@ if(BUILD_EXPERIMENTAL_FRAMEWORK)
 		target_compile_definitions(tblng-framework PRIVATE MENU_COLOR_SUPPORT)
 		target_compile_definitions(tblng-framework-static PRIVATE MENU_COLOR_SUPPORT)
 	endif()
+	if(USE_DEBUG_BUILD)
+		target_compile_definitions(tblng-framework PRIVATE DEBUG_BUILD)
+		target_compile_definitions(tblng-framework-static PRIVATE DEBUG_BUILD)
+	endif()
 	install(TARGETS tblng-framework tblng-framework-static
 		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -121,6 +146,9 @@ target_link_libraries(termux-bootloader-ng PRIVATE Curses::Curses)
 target_compile_options(termux-bootloader-ng PRIVATE "${CFLAGS}")
 if(MENU_COLOR_SUPPORT)
 	target_compile_definitions(termux-bootloader-ng PRIVATE MENU_COLOR_SUPPORT)
+endif()
+if(USE_DEBUG_BUILD)
+	target_compile_definitions(termux-bootloader-ng PRIVATE DEBUG_BUILD)
 endif()
 install(TARGETS termux-bootloader-ng
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

@@ -1,4 +1,4 @@
-#include <tblng-config.h>
+#include <tblng-intern-config.h>
 #include <ncurses.h>
 
 int look_theme2pair(const char *name) {

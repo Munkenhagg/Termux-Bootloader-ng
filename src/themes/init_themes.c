@@ -1,5 +1,5 @@
 #include <ncurses.h>
-#include <tblng-config.h>
+#include <tblng-intern-config.h>
 
 void init_theme_colors(void) {
 	if (tbl_colors_initialized) {
