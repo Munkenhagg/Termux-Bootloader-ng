@@ -1,4 +1,4 @@
-# Termux-Bootloader Nextgen
+# Termux-Bootloader Next Generation
 
 ## Info
 
@@ -35,4 +35,4 @@ Set by using `cmake .. -DOPTION`
 
 `USE_DEBUG_BUILD`: Makes framework and binary more debuggabld using gdb (ON/OFF)
 `BUILD_EXPERIMENTAL_FRAMEWORK`: builds experimental framework libs (ON/OFF)
-`MENU_COLOR_SUPPORT`: adds native menu color support for both binary and framework using `look_theme2pair();` and `init_theme_colors();`
+`MENU_COLOR_SUPPORT`: adds native menu color support for both binary and framework using `look_theme2pair();` and `init_theme_colors();` (ON/OFF)
