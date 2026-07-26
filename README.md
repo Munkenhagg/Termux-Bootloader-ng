@@ -2,9 +2,9 @@
 
 ## Info
 
-This is the equivelant to [my old termux-bootloader project](https://github.com/Munkenhagg/Termux-Bootloader) but rewritten in C
+This is the equivalent to [my old termux-bootloader project](https://github.com/Munkenhagg/Termux-Bootloader) but rewritten in C
 
-This is still a work in progress and zero changes to the framework is not a gurantee
+This is still a work in progress and zero changes to the framework is not a guarantee
 
 ### Menu drawing framework
 
@@ -33,6 +33,6 @@ If you encounter errors/warnings then please create a github issue.
 
 Set by using `cmake .. -DOPTION`
 
-`USE_DEBUG_BUILD`: Makes framework and binary more debuggabld using gdb (ON/OFF)
+`USE_DEBUG_BUILD`: Makes framework and binary more debuggable using gdb (ON/OFF)
 `BUILD_EXPERIMENTAL_FRAMEWORK`: builds experimental framework libs (ON/OFF)
 `MENU_COLOR_SUPPORT`: adds native menu color support for both binary and framework using `look_theme2pair();` and `init_theme_colors();` (ON/OFF)
