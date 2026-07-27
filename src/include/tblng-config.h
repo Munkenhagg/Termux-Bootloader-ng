@@ -36,7 +36,7 @@ int parse_json(void);
 bool has_permission(char *user_id, char *wanted_perm);
 int login_user(char *user_id, char *password);
 
-const char *menu_main(void);
+struct interactive_menu_output menu_main(void);
 
 void *tblng_enter_shell(void *no_use);
 void *tblng_login(void *no_use);

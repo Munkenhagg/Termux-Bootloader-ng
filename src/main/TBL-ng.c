@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 	init_theme_colors();
-	const char *selected = menu_main();
+	menu_output_t out = menu_main();
 	endwin();
-	printf("selected: %s\n", selected);
+	printf("selected: %s, int: %zu\n", out.selected, out.current_integer);
 	fflush(stdout);
 	return 0;
 }

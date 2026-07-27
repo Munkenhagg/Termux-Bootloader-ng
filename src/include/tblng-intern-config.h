@@ -19,6 +19,7 @@ struct interactive_menu_output {
         int8_t code;
         const char *selected;
 	void *callback_return;
+	size_t current_integer;
 };
 
 struct menu_map_entry {

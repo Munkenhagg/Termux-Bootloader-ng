@@ -46,6 +46,6 @@ struct interactive_menu_output interactive_menu(const struct menu_map *map) {
 			func_out = map->entries[current].function(map->entries[current].function_arg);
 		#endif
 	}
-	struct interactive_menu_output output = { .code = INTERACTIVE_MENU_SUCCESS, .selected = map->entries[current].option, .callback_return = func_out };
+	struct interactive_menu_output output = { .code = INTERACTIVE_MENU_SUCCESS, .selected = map->entries[current].option, .callback_return = func_out, .current_integer = current };
 	return output;
 }
