@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Termux-bootloader-ng VERSION 1.3.0 LANGUAGES C)
+project(Termux-bootloader-ng VERSION 1.3.1 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -117,6 +117,9 @@ configure_file(
 	"${CMAKE_CURRENT_SOURCE_DIR}/include/tblng-version.h.in"
 	"${CMAKE_CURRENT_BINARY_DIR}/include/gen-tblng-version.h"
 )
+if (USE_DEBUG_BUILD)
+	set(CFLAGS ${CFLAGS} -g)
+endif()
 if(BUILD_EXPERIMENTAL_FRAMEWORK)
 	add_library(tblng-framework SHARED ${LIB_SRC})
 	set_target_properties(tblng-framework PROPERTIES
