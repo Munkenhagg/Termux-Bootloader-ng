@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Termux-bootloader-ng VERSION 1.2.1 LANGUAGES C)
+project(Termux-bootloader-ng VERSION 1.2.2 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -38,6 +38,7 @@ set(MENU_FILES
 	set_menu_map_colors.c
 	set_menu_map_pointer_symbol.c
 	set_menu_map_sync_spaces.c
+	edit_menu_map_entry.c
 	menu_map_to_optstrarr.c
 )
 set(INITCONF_FILES

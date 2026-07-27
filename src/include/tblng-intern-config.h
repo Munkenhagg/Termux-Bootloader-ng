@@ -47,6 +47,7 @@ void delete_menu_map(struct menu_map *map);
 void set_menu_map_colors(struct menu_map *map, char *selected, char *unselected);
 void set_menu_map_pointer_symbol(struct menu_map *map, char *sym);
 void set_menu_map_sync_spaces(struct menu_map *map, uint8_t spaces);
+void edit_menu_map_entry(struct menu_map *map, int entrynum, struct menu_map_entry replace_entry);
 
 typedef struct interactive_menu_output menu_output_t;
 
