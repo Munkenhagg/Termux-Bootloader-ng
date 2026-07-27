@@ -8,8 +8,8 @@
 Example usage:
 
 ```C
-struct menu_map_entry *entries = { { "Option", "Function, "Function Argument" } };
-struct menu_map map = init_menu_map_from_array(entries);
+struct menu_map_entry entries[] = { { "Option", "Function, "Function Argument" } };
+struct menu_map *map = init_menu_map_from_array(entries);
 
 ```
 
@@ -21,12 +21,26 @@ signature: `struct menu_map *init_menu_map_from_array(const struct menu_map_entr
 Example usage:
 
 ```C
-struct menu_map map = init_menu_map_from_array(entries);
+struct menu_map *map = init_menu_map_from_array(entries);
 delete_menu_map(map);
 
 ```
 
 signature: `void delete_menu_map(struct menu_map *map);`
+
+### Edit entry
+
+`edit_menu_map_entry`: takes a given entry and entry number and replaces the entry.
+Example usage:
+
+```C
+struct menu_map *map = init_menu_map_from_array(entries);
+struct menu_map_entry new_entry = { "New option", New_Function, "New Function Argument" }
+edit_menu_map_entry(map, 0, new_entry);
+
+```
+
+signature: `void edit_menu_map_entry(struct menu_map *map, size_t entrynum, const struct menu_map_entry *replace_entry);`
 
 ## Menu map editing
 
@@ -37,7 +51,7 @@ signature: `void delete_menu_map(struct menu_map *map);`
 Example usage:
 
 ```C
-struct menu_map map = init_menu_map_from_array(entries);
+struct menu_map *map = init_menu_map_from_array(entries);
 set_menu_map_colors(map, "black", "blue"); // black selected, blue unselected
 
 ```
@@ -100,3 +114,4 @@ menu_output_t output = interactive_menu(map); // start a menu and get output fro
 signature: `struct interactive_menu_output interactive_menu(const struct menu_map *map);`
 
 **note**: `menu_output_t` is a typedef of `struct interactive_menu_output`
+

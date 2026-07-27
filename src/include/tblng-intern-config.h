@@ -48,9 +48,12 @@ void delete_menu_map(struct menu_map *map);
 void set_menu_map_colors(struct menu_map *map, char *selected, char *unselected);
 void set_menu_map_pointer_symbol(struct menu_map *map, char *sym);
 void set_menu_map_sync_spaces(struct menu_map *map, uint8_t spaces);
-void edit_menu_map_entry(struct menu_map *map, size_t entrynum, const struct menu_map_entry *replace_entry);
+void edit_menu_map_entry(struct menu_map *map, size_t entrynum, const struct menu_map_entry replace_entry);
 
 typedef struct interactive_menu_output menu_output_t;
+typedef struct menu_map menu_map_t;
+typedef struct menu_map_entry menu_map_entry_t;
+
 
 #define INTERACTIVE_MENU_CTRLC_PRESSED -1
 #define INTERACTIVE_MENU_INTERNAL_ERROR -2
